@@ -1,0 +1,15 @@
+
+CustomListview
+사용 권한 : INTERNET
+사용 라이브러리 : Glide
+커스텀리스트뷰 예제, 뷰홀더 사용
+
+Permission
+사용 권한 :
+사용 라이브러리 : TedPermission
+권한 체크, 테드를 사용한 예제, 일반 예제, 모듈화 한 예제가 있음
+// https://m.blog.naver.com/beaqon/221440485167 참고하기
+// https://gun0912.tistory.com/56?category=560271
+Name
+사용 권한 :
+사용 라이브러리 :

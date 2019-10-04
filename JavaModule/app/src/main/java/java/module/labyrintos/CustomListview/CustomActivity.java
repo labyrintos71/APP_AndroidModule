@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.module.labyrintos.R;
 
-public class Activity extends AppCompatActivity {
+public class CustomActivity extends AppCompatActivity {
 
     private CustomAdapter adapter;
     private ListView listView;

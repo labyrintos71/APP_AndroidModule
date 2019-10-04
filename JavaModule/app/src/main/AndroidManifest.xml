@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <!-- CustomListview-->
-        <activity android:name=".CustomListview.Activity"/>
+        <activity android:name=".CustomListview.CustomActivity"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>
