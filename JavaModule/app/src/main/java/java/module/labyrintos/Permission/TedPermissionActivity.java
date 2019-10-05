@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.module.labyrintos.R;
 import java.util.List;
 
 public class TedPermissionActivity  extends AppCompatActivity {
@@ -31,9 +30,7 @@ public class TedPermissionActivity  extends AppCompatActivity {
                         .show();
             }
 
-
         };
-
 
         TedPermission.with(this)
                 .setPermissionListener(permissionlistener)
