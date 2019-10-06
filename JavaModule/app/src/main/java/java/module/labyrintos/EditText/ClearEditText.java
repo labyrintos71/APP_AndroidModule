@@ -13,11 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 
-
-/**
- * Created by TedPark on 16. 4. 11..
- */
-
 public class ClearEditText extends AppCompatEditText implements TextWatcher, View.OnTouchListener, View.OnFocusChangeListener {
 
     private Drawable clearDrawable;

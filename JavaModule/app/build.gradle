@@ -34,4 +34,6 @@ dependencies {
     //권한 설정 라이브러리
     implementation 'gun0912.ted:tedpermission:2.2.2'
 
+    //프리퍼런스 기능 사용을 위함
+    implementation 'androidx.preference:preference:1.1.0'
 }
