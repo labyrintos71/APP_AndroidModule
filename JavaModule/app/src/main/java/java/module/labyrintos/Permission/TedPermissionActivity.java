@@ -12,6 +12,9 @@ import com.gun0912.tedpermission.TedPermission;
 
 import java.util.List;
 
+/**
+ * Created by Labyrintos on 2019-10-05
+ */
 public class TedPermissionActivity  extends AppCompatActivity {
 
     @Override

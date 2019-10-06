@@ -6,7 +6,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.module.labyrintos.R;
-
+/**
+ * Created by Labyrintos on 2019-10-04
+ */
 public class CustomActivity extends AppCompatActivity {
 
     private CustomAdapter adapter;

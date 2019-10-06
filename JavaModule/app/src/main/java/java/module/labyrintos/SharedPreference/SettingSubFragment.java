@@ -9,6 +9,9 @@ import androidx.preference.PreferenceManager;
 
 import java.module.labyrintos.R;
 
+/**
+ * Created by Labyrintos on 2019-10-06
+ */
 public class SettingSubFragment extends PreferenceFragmentCompat {
     private SharedPreferences prefs;
 

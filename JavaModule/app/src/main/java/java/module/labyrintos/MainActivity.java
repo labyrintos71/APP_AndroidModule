@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.module.labyrintos.SharedPreference.SettingActivity;
-
+/**
+ * Created by Labyrintos on 2019-10-01
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -8,6 +8,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 
+/**
+ * Created by Labyrintos on 2019-10-06
+ */
+//https://developer.android.com/guide/topics/ui/settings
 public class SettingActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     @Override

@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
+/**
+ * Created by Labyrintos on 2019-10-06
+ */
 public class SharedPreferenceEditor {
 
     private SharedPreferences sharedPref ;

@@ -10,7 +10,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.module.labyrintos.R;
-
+/**
+ * Created by Labyrintos on 2019-10-04
+ */
 public class PermissionActivity  extends AppCompatActivity {
     private final int REQUEST_PERMISSION = 1999;
     @Override

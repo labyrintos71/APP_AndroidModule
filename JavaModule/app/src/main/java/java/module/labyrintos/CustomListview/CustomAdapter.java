@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide;
 
 import java.module.labyrintos.R;
 import java.util.ArrayList;
-
+/**
+ * Created by Labyrintos on 2019-10-04
+ */
 public class CustomAdapter extends BaseAdapter {
 
     private ArrayList<CustomItem> listCustom = new ArrayList<>();

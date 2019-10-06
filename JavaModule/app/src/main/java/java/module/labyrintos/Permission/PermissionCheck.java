@@ -12,7 +12,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
-
+/**
+ * Created by Labyrintos on 2019-10-04
+ */
 public class PermissionCheck {
 
     String permissionChk;
