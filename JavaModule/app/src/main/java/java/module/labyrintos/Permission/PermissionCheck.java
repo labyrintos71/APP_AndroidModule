@@ -12,11 +12,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+
+
 /**
  * Created by Labyrintos on 2019-10-04
  */
 public class PermissionCheck {
 
+    private final String TAG = PermissionCheck.class.getSimpleName();
     String permissionChk;
     boolean result = false;
     Activity activity;
@@ -28,7 +31,7 @@ public class PermissionCheck {
         this.activity = act;
 
 
-        Log.d("permission", permissionChk);
+        Log.d(TAG, permissionChk);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // 사용자의 안드로이드 OS버전이 마시멜로우 이상인지 체크. 맞다면 IF문 내부의 소스코드 작동.
             // 사용자의 단말기에 "전화 걸기" 기능이 허용되어 있는지 확인.
             int permissionResult = mContext.checkSelfPermission(permissionChk); // 해당 퍼미션 체크.

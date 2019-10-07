@@ -8,12 +8,14 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import java.module.labyrintos.Permission.PermissionCheck;
 import java.module.labyrintos.R;
 
 /**
  * Created by Labyrintos on 2019-10-06
  */
 public class SettingFragment extends PreferenceFragmentCompat {
+    private final String TAG = SettingFragment.class.getSimpleName();
     private SharedPreferences prefs;
 
     private ListPreference soundPreference;
@@ -38,8 +40,8 @@ public class SettingFragment extends PreferenceFragmentCompat {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if(key.equals("sound_list")){
                 soundPreference.setSummary(prefs.getString("sound_list", "카톡"));
-                Log.d("TESTTTTT", "onSharedPreferenceChanged: "+key);
-                Log.d("TESTTTTT", "onSharedPreferenceChanged: "+sharedPreferences.getString("sound_list","this is default"));
+                Log.d(TAG, "onSharedPreferenceChanged: "+key);
+                Log.d(TAG, "onSharedPreferenceChanged: "+sharedPreferences.getString("sound_list","this is default"));
             }
 
         }
