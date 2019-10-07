@@ -36,4 +36,12 @@ dependencies {
 
     //프리퍼런스 기능 사용을 위함
     implementation 'androidx.preference:preference:1.1.0'
+
+    //okhttp
+  //  implementation 'com.squareup.okhttp3:okhttp:4.2.1'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
 }

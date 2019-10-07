@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SharedPreference.SettingActivity"/>
+        <activity android:name=".ExampleTest.RetrofitActivity"/>
     </application>
 
 </manifest>
