@@ -39,6 +39,7 @@ dependencies {
 
     //okhttp
   //  implementation 'com.squareup.okhttp3:okhttp:4.2.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
