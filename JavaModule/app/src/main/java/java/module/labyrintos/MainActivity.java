@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.module.labyrintos.ExampleTest.RetrofitActivity;
-import java.module.labyrintos.Network.OkHttpActivity;
-import java.module.labyrintos.SharedPreference.SettingActivity;
+import java.module.labyrintos.Retrofit.RetrofitActivity;
+
 /**
  * Created by Labyrintos on 2019-10-01
  */

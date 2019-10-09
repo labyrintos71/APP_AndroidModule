@@ -1,4 +1,4 @@
-package java.module.labyrintos.ExampleTest;
+package java.module.labyrintos.Retrofit;
 
 import com.google.gson.annotations.SerializedName;
 

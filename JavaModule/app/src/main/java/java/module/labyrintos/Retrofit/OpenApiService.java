@@ -1,4 +1,4 @@
-package java.module.labyrintos.ExampleTest;
+package java.module.labyrintos.Retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
