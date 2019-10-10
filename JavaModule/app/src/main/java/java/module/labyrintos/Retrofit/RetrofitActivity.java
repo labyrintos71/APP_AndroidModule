@@ -47,20 +47,49 @@ public class RetrofitActivity extends AppCompatActivity {
                 .build();
 */
 
-
-        OpenApiService openApiService = retrofit.create(OpenApiService.class);
-        Call<ListUser> tickerInfo = openApiService.users(2);
-        tickerInfo.enqueue(new Callback<ListUser>() {
+        RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+        Call<PostData> tickerInfo = retrofitService.doLogin("eve.holt@reqres.in","cityslicka");
+        tickerInfo.enqueue(new Callback<PostData>() {
             @Override
-            public void onResponse(Call<ListUser> call, Response<ListUser> response) {
+            public void onResponse(Call<PostData> call, Response<PostData> response) {
                 if(response.body()!=null)
-                Toast.makeText(RetrofitActivity.this, response.body().user.get(0).avatar, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RetrofitActivity.this, response.body().token, Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<ListUser> call, Throwable t) {
+            public void onFailure(Call<PostData> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+/*
+
+        RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+        Call<PutData> tickerInfo = retrofitService.updateJob(2,"morpheus","zion resident");
+        tickerInfo.enqueue(new Callback<PutData>() {
+            @Override
+            public void onResponse(Call<PutData> call, Response<PutData> response) {
+                if(response.body()!=null)
+                Toast.makeText(RetrofitActivity.this, response.body().updatedAt, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<PutData> call, Throwable t) {
+                Toast.makeText(RetrofitActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+*/
+
+        // Call<ListUser> tickerInfo = retrofitService.users(2);
+        //        tickerInfo.enqueue(new Callback<ListUser>() {
+        //            @Override
+        //            public void onResponse(Call<ListUser> call, Response<ListUser> response) {
+        //                if(response.body()!=null)
+        //                Toast.makeText(RetrofitActivity.this, response.body().user.get(0).avatar, Toast.LENGTH_SHORT).show();
+        //            }
+        //            @Override
+        //            public void onFailure(Call<ListUser> call, Throwable t) {
+        //                Toast.makeText(RetrofitActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+        //            }
+        //        });
+
         //Call<SingleUser> tickerInfo = openApiService.user(2);
         //        tickerInfo.enqueue(new Callback<SingleUser>() {
         //            @Override
