@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".SharedPreference.SettingActivity"/>
         <activity android:name=".Retrofit.RetrofitActivity"/>
+        <activity android:name=".Retrofit.SingletonExample.Activity"/>
     </application>
 
 </manifest>
