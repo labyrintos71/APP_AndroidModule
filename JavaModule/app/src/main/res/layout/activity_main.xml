@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <java.module.labyrintos.EditText.ClearEditText
@@ -12,14 +13,32 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:id="@+id/edittext"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:text="button"
+        android:layout_gravity="center"
         android:id="@+id/button"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textview"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID">
 
+        <java.module.labyrintos.EditText.MaterialClearEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="PASSWORD">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
