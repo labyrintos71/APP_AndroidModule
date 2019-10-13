@@ -191,13 +191,23 @@ class TestFile {
 
     //메소드에 람다식을 인수로 받는 예제
     fun main(args: Array<String>) {
+        temp(1, 2, { a: Int, b: Int -> a + b })
+        temp(1, 2){ a: Int, b: Int -> a + b }
         temp(1, 2, ::sum3)
+        emptyrambda(3){7}
+        emptyrambda(3,{7})
+        emptyrambda(3,{->7})
+
+        emptyrambdas(3){ a: Int -> a+7 }
     }
 
     fun temp(a: Int, b: Int, c: (Int, Int) -> Int) = c(a, b)
     fun sum3(a: Int, b: Int): Int {
         return a + b
     }
+
+    fun emptyrambda(a: Int,c: () -> Any) = c()
+    fun emptyrambdas(a: Int,c: (a: Int) -> Any) = c(a)
 
     //익명함수
     var funcSum = fun(a: Int, b: Int): Int { return a + b }
