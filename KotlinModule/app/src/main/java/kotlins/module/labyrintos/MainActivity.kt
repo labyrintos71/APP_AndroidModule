@@ -13,7 +13,9 @@ class MainActivity : AppCompatActivity() {
         val test = test()
         test.tests=2
         text.text= test.tests.toString() +""
-
+        assert(test.tests>3)
+         assert(false) {"123"}
+        throw AssertionError("123")
     }
     class test{
         var tests=1
