@@ -6,11 +6,36 @@ import java.lang.NumberFormatException
  * Created by Labyrintos on 2019-10-13
  */
 
-class TestFile {
+class extension {
+    /** assert
+     * assert 는 조건식이 false 일 경우에 exception을 발생시킨다.
+     * 때문에 릴리즈 코드가 아니라 디버그 전용 기능이며 주로 디버깅할때 사용.
+     * 기본적으로 비활성화 되어있기때문에 아래처럼 adb로 활성화 시켜주어서
+     * assert()메소드를 사용하거나 AssertionError를 던져서 처리하는게 좋다.
+     */
+    //adb shell setprop debu.asser 1
+    object Assert{
+        fun verify(condition: Boolean, message: String){
+            if(!condition) throw AssertionError(message)
+        }
+    }
     //if 예제
     var x: Int = if (10 > 20) 5 else 10
     var y = if (10 > 20) 5 else 10
 
+    //? nullable 객체
+    val a: String = "Kotlin"
+    var b: String? = null
+    fun nullableTest() {
+        println(b?.length) //null 출력됨
+    }
+
+    // ?: 엘비스 연산자, 좌항이 null 일때 우항값 반환
+    fun elbisTest() {
+        print(b?.length ?: -1) // -1
+        b = "str"
+        print(b?.length ?: -1) // 3
+    }
 
     // when
     //기초
@@ -47,6 +72,7 @@ class TestFile {
         }
     }
 
+    //data class 저장용 객체에서 사용
     data class ob(val value: Int, val valid: Boolean, val max: Int)
 
     fun maginNum(a: Int): Int {
@@ -79,7 +105,7 @@ class TestFile {
     data class Dog(var age: Int)
 
 
-    //클래스
+    //class
 
     //내책
     class Student(var roll_number: Int, var name: String = "sheldon")
@@ -97,7 +123,7 @@ class TestFile {
 
     }
 
-    //게터 세터
+    //getter setter
     class nullcheck {
         var string: String? = null
             get() = if (field == null) "null" else field
@@ -187,18 +213,16 @@ class TestFile {
 
     //람다식, 리턴값이 없을경우 예제
     val funcSayHi: (String) -> Unit = { name: String -> println("Hi $name") }
-    //funcSayHi("SEX")
 
     //메소드에 람다식을 인수로 받는 예제
     fun main(args: Array<String>) {
         temp(1, 2, { a: Int, b: Int -> a + b })
-        temp(1, 2){ a: Int, b: Int -> a + b }
+        temp(1, 2) { a: Int, b: Int -> a + b }
         temp(1, 2, ::sum3)
-        emptyrambda(3){7}
-        emptyrambda(3,{7})
-        emptyrambda(3,{->7})
-
-        emptyrambdas(3){ a: Int -> a+7 }
+        emptyrambda(3) { 7 }
+        emptyrambda(3, { 7 })
+        emptyrambda(3, { -> 7 })
+        emptyrambdas(3) { a: Int -> a + 7 }
     }
 
     fun temp(a: Int, b: Int, c: (Int, Int) -> Int) = c(a, b)
@@ -206,14 +230,36 @@ class TestFile {
         return a + b
     }
 
-    fun emptyrambda(a: Int,c: () -> Any) = c()
-    fun emptyrambdas(a: Int,c: (a: Int) -> Any) = c(a)
+    fun emptyrambda(a: Int, c: () -> Any) = c()
+    fun emptyrambdas(a: Int, c: (a: Int) -> Any) = c(a)
 
     //익명함수
     var funcSum = fun(a: Int, b: Int): Int { return a + b }
+    /*
+    람다식 안에서 return 할 수 없는 경우가 있습니다.
+    처리 중간에 조건을 주고 중간에 빠져나오고 싶지만 return이 없는 람다식의 경우입니다.
+    아래 예제와 같은 람다식에서 조건에 일치하는 경우 처리를 종료하고 싶은 경우를 보겠습니다.
+
+    numbers.forEach { number ->
+        if (number % 2 == 1) {
+            // 여기에서 처리를 끝내고 싶은 경우
+        }
+
+        ...
+    }
+    이러한 경우에는 람다식이 아닌 익명 함수를 사용하는 것이 좋습니다.
+
+    numbers.forEach(fun(number: Int) {
+        if (number % 2 == 1) {
+            return // 처리 종류
+        }
+
+        ...
+    })
+    */
 
     //Object
-    // 싱글톤 지원 기능
+    //싱글톤 지원 기능
     //오브젝트 는 싱글통 지원을 위해 만들어짐. 저상태로 사용해도됨
     //companion 오브젝트는 클래스에서 오브젝트로 선언한 부분만 싱글톤화 됨.
     class tester {
@@ -238,7 +284,7 @@ class TestFile {
         var foo = "foo"
     }
 
-
+    //use
     //use 키워드는 스트림의 close를 자동으로 해줌
     //안드로이드에서는 이게 있음openFileInput
     /*   FileInputStream("file.txt").use {
@@ -248,66 +294,79 @@ class TestFile {
        }*/
 
 
-    var strs = "섹스"
     //확장함수
+    var strs = "섹스"
     val addStr = fun String.(str: String): String {
         return this + str
     }
-    fun String.addStr(successor: String): String {
+
+  /*  fun String.deleteLastStr(successor: String): String {
         return this + successor
+    }*/
+    // 여기서 리시버타입은 String이된다. 즉 확장하는 자기 자신의 타입인것
+    //책에서 나오는 리터럴은 람다를 넘겨준 식. 즉 표현식 그 자체임
+    //         여기 부분
+    private fun String.deleteLastStr(): String {
+        return this.substring(0,this.length-1)
     }
-   // str = str.addStr("하기 딱 좋은 날씨로구나.")
 
-    //확장함수,  프로퍼티 예제
-    fun mai2n() {
+    private fun Any.deleteLastStrㄴ(): String {
+        return this.toString().substring(0)
+    }
+    var s = 1
+    // str = str.addStr("하기 딱 좋은 날씨로구나.")
 
-        fun String.lastChar1():Char = this.get(this.length - 1)
+    //확장함수 심화
+    fun extendFun() {
+        fun String.lastChar1(): Char = this.get(this.length - 1)
 
         //this 생략 가능
-        fun String.lastChar2():Char = get(length - 1)
+        fun String.lastChar2(): Char = get(length - 1)
 
-        fun <T> Collection<T>.joinToString(separator: String = ",",
-                                           prefix: String = "(",
-                                           postfix: String = ")"
-        ): String = this.toString() + " numbers"
-
-        //String 제네릭
-        fun Collection<String>.join(separator: String = ",",
-                                    prefix: String = "(",
-                                    postfix: String = ")"
+        fun <T> Collection<T>.convertToString(
+            separator: String = ",",
+            prefix: String = "(",
+            postfix: String = ")"
         ): String {
-            return this.toString()+"sadf"
+            var result = prefix
+            this.map { it.toString()+separator }.forEach { result = result + it }
+            // == this.forEach { result = result + it + separator }
+            return result.deleteLastStr() + postfix
         }
 
-//사용
-        val intlist = listOf(1,2,3,4)
+        //String 제네릭
+        fun Collection<String>.join(
+            separator: String = ",",
+            prefix: String = "(",
+            postfix: String = ")"
+        ): String = this.toString() + " numbers"
+        //사용
+        val intlist = listOf(1, 2, 3, 4)
         //intlist.join() //에러!!! Int 타입은 불가능하다
-//사용
+        // 사용
         val list = listOf("1", "2", "3")
         print(list.joinToString())
     }
-    class testclass{
-        //확장 프로퍼티
+
+    //확장 프로퍼티
+    class extendProperty {
         //get() 구현
         val String.lastChar: Char
             get() = get(length - 1)
         //  get() { return last().toString()}
+
         //리스트인경우 get(), set() 구현
         var List<Any>.name: String
-            get() =  name
+            get() = name
             set(value) {
                 name = last().toString()
             }
 
-        fun test(){
-
+        fun test() {
             "zerog".lastChar        //확장 프로퍼티 호출
             val list = listOf("a", "b", "c")
             list.name              //get()
             list.name = "d"      //set()
         }
-
-
     }
-    // ?: 엘비스 연산자
 }

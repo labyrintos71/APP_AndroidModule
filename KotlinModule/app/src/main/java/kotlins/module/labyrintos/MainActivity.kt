@@ -2,7 +2,6 @@ package kotlins.module.labyrintos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlins.module.labyrintos.Expression.TestFile
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         test.tests=2
         text.text= test.tests.toString() +""
         assert(test.tests>3)
-         assert(false) {"123"}
+        assert(false) {"123"}
         throw AssertionError("123")
     }
     class test{
