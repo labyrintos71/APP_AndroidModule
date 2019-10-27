@@ -1,10 +1,11 @@
-package kotlins.module.labyrintos.reee
+package kotlins.module.labyrintos.RetrofitForRXJava
 
 
 import kotlins.module.labyrintos.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by Labyrintos on 2019-10-27
@@ -19,18 +20,12 @@ class RetrofitCreator {
         private fun defaultRetrofit(): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(createOkHttpClient())
                 .build()
         }
 
-        fun defaultRetrofitService(): Retrofit {
-            return Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(createOkHttpClient())
-                .build()
-        }
 
         fun <T> create(service: Class<T>): T {
             return defaultRetrofit().create(service)

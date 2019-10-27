@@ -1,4 +1,4 @@
-package kotlins.module.labyrintos.reee
+package kotlins.module.labyrintos.RetrofitForRXJava
 
 import com.google.gson.annotations.SerializedName
 

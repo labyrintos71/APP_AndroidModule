@@ -3,18 +3,16 @@ package kotlins.module.labyrintos
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import kotlins.module.labyrintos.Retrofit.ReqResService
-import kotlins.module.labyrintos.Retrofit.RetrofitCreator
-import kotlins.module.labyrintos.Retrofit.SingleUserModel
+import android.widget.Toast
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import kotlins.module.labyrintos.RetrofitForRXJava.GithubApi
+import kotlins.module.labyrintos.RetrofitForRXJava.GithubResponseModel
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var compositeDisposable: CompositeDisposable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,26 +33,24 @@ class MainActivity : AppCompatActivity() {
             noButton { toast("cancel을 클릭") }
         }*/
 
-        val service = RetrofitCreator.create(ReqResService::class.java)
-        service.getUser(1).enqueue(object : Callback<SingleUserModel>{
-            override fun onFailure(call: Call<SingleUserModel>, t: Throwable) {
-            }
+        compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            GithubApi.getRepoList("test")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response: GithubResponseModel ->
+                    for (item in response.items) {
+                        Log.d("MainActivity", item.name)
+                    }
+                    text.text =response.items[0].name
+            }, { error: Throwable ->
+                Log.d("MainActivity", error.localizedMessage)
+                Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }))
+    }
 
-            override fun onResponse(
-                call: Call<SingleUserModel>,
-                response: Response<SingleUserModel>
-            ) {
-                Log.d("asdf","asfasfd")
-                response.body().let {
-                    Log.d("asdf","asfasfd2")
-                    val data = it
-                    text.text="${data?.data?.id}"
-                }
-            }
-        })
-
-     //   assert(test.tests>3)
-     //   assert(false) {"123"}
-     //   throw AssertionError("123")
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
     }
 }
