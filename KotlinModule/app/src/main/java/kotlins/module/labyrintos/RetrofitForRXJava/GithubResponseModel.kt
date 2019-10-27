@@ -1,7 +1,5 @@
 package kotlins.module.labyrintos.RetrofitForRXJava
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * Created by Labyrintos on 2019-10-27
  */
