@@ -7,8 +7,9 @@ import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlins.module.labyrintos.RetrofitForRXJava.GithubApi
+import kotlins.module.labyrintos.RetrofitForRXJava.GithubService
 import kotlins.module.labyrintos.RetrofitForRXJava.GithubResponseModel
+import kotlins.module.labyrintos.RetrofitForRXJava.RetrofitCreator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        compositeDisposable = CompositeDisposable()
    /*     verticalLayout{
             padding = dip(20)
 
@@ -28,25 +30,21 @@ class MainActivity : AppCompatActivity() {
                 margin = dip(10)
             }
         }*/
-       /* alert ("다이얼로그 메세지 데숭", "다이얼로그" ){
+       /* alert ("다이얼로그     메세지 데숭", "다이얼로그" ){
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
 
-        compositeDisposable = CompositeDisposable()
+        val service = RetrofitCreator.create(GithubService::class.java)
         compositeDisposable.add(
-            GithubApi.getRepoList("test")
+            service.getRepoList("discord")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response: GithubResponseModel ->
-                    for (item in response.items) {
-                        Log.d("MainActivity", item.name)
-                    }
-                    text.text =response.items[0].name
-            }, { error: Throwable ->
-                Log.d("MainActivity", error.localizedMessage)
-                Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
-            }))
+                .subscribe({
+                    text.text=it.items[0].full_name
+                },{
+                    Log.d("MainActivity","ERROR message : ${it.message}")
+                }))
     }
 
     override fun onDestroy() {
