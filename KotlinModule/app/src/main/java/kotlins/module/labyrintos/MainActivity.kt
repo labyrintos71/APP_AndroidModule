@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         val service = RetrofitCreator.create(GithubService::class.java)
         compositeDisposable.add(
-            service.getRepoList("discord")
+            RetrofitCreator
+                .create(GithubService::class.java)
+                .getRepoList("discord")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
