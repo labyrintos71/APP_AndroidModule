@@ -7,6 +7,7 @@ import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlins.module.labyrintos.Retrofit.ReqResService
 import kotlins.module.labyrintos.RetrofitForRXJava.GithubService
 import kotlins.module.labyrintos.RetrofitForRXJava.GithubResponseModel
 import kotlins.module.labyrintos.RetrofitForRXJava.RetrofitCreator
@@ -17,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        compositeDisposable = CompositeDisposable()
    /*     verticalLayout{
             padding = dip(20)
 
@@ -34,23 +34,7 @@ class MainActivity : AppCompatActivity() {
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
-
-        val service = RetrofitCreator.create(GithubService::class.java)
-        compositeDisposable.add(
-            RetrofitCreator
-                .create(GithubService::class.java)
-                .getRepoList("discord")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    text.text=it.items[0].full_name
-                },{
-                    Log.d("MainActivity","ERROR message : ${it.message}")
-                }))
+       val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
-    }
 }

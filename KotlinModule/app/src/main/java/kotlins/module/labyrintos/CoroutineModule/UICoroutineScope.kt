@@ -1,12 +1,16 @@
-package com.coroutine.coroutineexample.module
+package kotlins.module.labyrintos.CoroutineModule
 
 import android.util.Log
-import com.coroutine.coroutineexample.BuildConfig.DEBUG
+import kotlins.module.labyrintos.BuildConfig.DEBUG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-class UICoroutineScope(private val dispatchers: CoroutineContext = Dispatchers.Main) : BaseCoroutineScope {
+/**
+ * Created by Labyrintos on 2019-10-31
+ */
+class UICoroutineScope(private val dispatchers: CoroutineContext = Dispatchers.Main) :
+    BaseCoroutineScope {
 
     override val job: Job = Job()
 
