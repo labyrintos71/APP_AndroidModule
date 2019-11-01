@@ -1,5 +1,6 @@
 package kotlins.module.labyrintos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlins.module.labyrintos.Retrofit.ReqResService
+import kotlins.module.labyrintos.RetrofitForCouroutine.RetrofitActivity
 import kotlins.module.labyrintos.RetrofitForRXJava.GithubService
 import kotlins.module.labyrintos.RetrofitForRXJava.GithubResponseModel
 import kotlins.module.labyrintos.RetrofitForRXJava.RetrofitCreator
@@ -34,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
-       val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
+        startActivity(Intent(this,RetrofitActivity::class.java))
+       //val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
 
 }
