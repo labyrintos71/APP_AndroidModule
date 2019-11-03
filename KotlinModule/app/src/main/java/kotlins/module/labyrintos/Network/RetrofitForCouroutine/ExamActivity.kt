@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 /**
  * Created by Labyrintos on 2019-11-01
  */
-class RetrofitActivity :CoroutineScopeActivity(){
+class ExamActivity :CoroutineScopeActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

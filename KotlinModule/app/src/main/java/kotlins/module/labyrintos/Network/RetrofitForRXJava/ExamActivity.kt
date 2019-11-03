@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Created by Labyrintos on 2019-10-31
  */
-class RetrofitActivity : AppCompatActivity() {
+class ExamActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
