@@ -1,11 +1,10 @@
-package kotlins.module.labyrintos.RetrofitForCouroutine
+package kotlins.module.labyrintos.Network.RetrofitForCouroutine
 
 import android.os.Bundle
 import kotlins.module.labyrintos.CoroutineModule.CoroutineScopeActivity
 import kotlins.module.labyrintos.R
-import kotlins.module.labyrintos.Retrofit.CoroutineService
-import kotlins.module.labyrintos.Retrofit.RetrofitCreator
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlins.module.labyrintos.Network.Retrofit.CoroutineService
+import kotlins.module.labyrintos.Network.Retrofit.RetrofitCreator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

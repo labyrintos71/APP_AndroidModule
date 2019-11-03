@@ -1,4 +1,4 @@
-package kotlins.module.labyrintos.Retrofit
+package kotlins.module.labyrintos.Network.Retrofit
 
 /**
  * Created by Labyrintos on 2019-10-27

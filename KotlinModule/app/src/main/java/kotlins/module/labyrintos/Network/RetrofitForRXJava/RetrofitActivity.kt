@@ -1,4 +1,4 @@
-package kotlins.module.labyrintos.RetrofitForRXJava
+package kotlins.module.labyrintos.Network.RetrofitForRXJava
 
 import android.os.Bundle
 import android.util.Log

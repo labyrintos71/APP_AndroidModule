@@ -1,4 +1,4 @@
-package kotlins.module.labyrintos.RetrofitForRXJava
+package kotlins.module.labyrintos.Network.RetrofitForRXJava
 
 /**
  * Created by Labyrintos on 2019-10-27

@@ -3,17 +3,8 @@ package kotlins.module.labyrintos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlins.module.labyrintos.Retrofit.ReqResService
-import kotlins.module.labyrintos.RetrofitForCouroutine.RetrofitActivity
-import kotlins.module.labyrintos.RetrofitForRXJava.GithubService
-import kotlins.module.labyrintos.RetrofitForRXJava.GithubResponseModel
-import kotlins.module.labyrintos.RetrofitForRXJava.RetrofitCreator
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlins.module.labyrintos.Network.RetrofitForCouroutine.RetrofitActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
