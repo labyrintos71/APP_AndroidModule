@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.reactivex.disposables.CompositeDisposable
-import kotlins.module.labyrintos.Contacts.TesterActivity
-import kotlins.module.labyrintos.Network.RetrofitForCouroutine.RetrofitActivity
+import kotlins.module.labyrintos.Permission.Case4Activity
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
-        startActivity(Intent(this,TesterActivity::class.java))
+        startActivity(Intent(this, Case4Activity::class.java))
        //val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
 

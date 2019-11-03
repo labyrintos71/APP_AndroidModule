@@ -8,9 +8,6 @@ import android.provider.ContactsContract
  * Created by Labyrintos on 2019-11-02
  */
 object ContactsReader {
-    //NEED
-   // <uses-permission android:name="android.permission.READ_CONTACTS" />
-    //<uses-permission android:name="android.permission.WRITE_CONTACTS" />
     fun getNameOfTell(context: Context?, tell: String): String {
         var name = tell
         val cursor = context?.contentResolver?.query(
