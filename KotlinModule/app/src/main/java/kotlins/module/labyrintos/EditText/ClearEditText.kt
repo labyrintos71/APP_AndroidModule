@@ -17,7 +17,8 @@ import androidx.core.graphics.drawable.DrawableCompat
 class ClearEditText : AppCompatEditText, TextWatcher, View.OnTouchListener,
     View.OnFocusChangeListener {
     private val drawable: Drawable
-
+    private var onFocusListener: OnFocusChangeListener? = null
+    private var onTouchListener: OnTouchListener? = null
 
     init {
         drawable = DrawableCompat.wrap(
@@ -28,27 +29,52 @@ class ClearEditText : AppCompatEditText, TextWatcher, View.OnTouchListener,
         )
         DrawableCompat.setTintList(drawable, hintTextColors)
         drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
-        setCl
+        setClearIconVisible(false)
+
+        super.setOnTouchListener(this)
+        super.setOnFocusChangeListener(this)
+        addTextChangedListener(this)
     }
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, def: Int) : super(context, attrs, def)
 
-    private fun setClearIconVisible(boolean: Boolean){
+    override fun setOnTouchListener(onTouchListener: OnTouchListener?) {
+        this.onTouchListener = onTouchListener
+    }
 
+    override fun setOnFocusChangeListener(onFocusChangeListener: OnFocusChangeListener?) {
+        this.onFocusListener = onFocusChangeListener
+    }
+
+    private fun setClearIconVisible(visible: Boolean) {
+        drawable.setVisible(visible, false)
+        setCompoundDrawables(null, null, if (visible) drawable else null, null)
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
-    override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
+        val x = motionEvent?.x?.toInt() ?: 0
+        if (drawable.isVisible && x > width - paddingRight - drawable.intrinsicWidth) {
+            if (motionEvent?.action == MotionEvent.ACTION_UP) {
+                error = null
+                text = null
+            }
+            return true
+        }
+        return onTouchListener?.onTouch(view, motionEvent) ?: false
     }
 
-    override fun onFocusChange(p0: View?, p1: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onFocusChange(view: View?, hasFocus: Boolean) {
+        text?.let {
+            setClearIconVisible(if (hasFocus) text.toString().isNotEmpty() else false)
+        }
+
+        onFocusListener?.onFocusChange(view, hasFocus)
     }
 
     override fun onTextChanged(
@@ -58,9 +84,12 @@ class ClearEditText : AppCompatEditText, TextWatcher, View.OnTouchListener,
         lengthAfter: Int
     ) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        text?.let {
+            if (isFocused)
+                setClearIconVisible(text.isNotEmpty())
+        }
     }
 
     override fun afterTextChanged(p0: Editable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
