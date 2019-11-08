@@ -14,6 +14,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import kotlins.module.labyrintos.R
 import org.jetbrains.anko.layoutInflater
+import org.jetbrains.anko.sdk27.coroutines.onTouch
 
 /**
  * Created by Labyrintos on 2019-11-09
@@ -49,6 +50,14 @@ class VetricalHintSeekBar : RelativeLayout {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
+        hintText.setOnTouchListener(object : OnTouchListener{
+            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                verticalSeekbar.progress =(verticalSeekbar.max * (1 - (hintText.y + (p1?.y ?: 0f)) / verticalSeekbar.height)).toInt()
+                Log.e("12347", "${p0?.id==hintText.id} / ${p1?.action} : ${(1 - (hintText.y + (p1?.y ?: 0f)) / verticalSeekbar.height)} , ${ verticalSeekbar.height}, ${hintText.height}, ${hintText.top}")
+                return true
+            }
+        })
+
         //초기값 설정
         Handler().postDelayed({
                 verticalSeekbar.max = (DISTANCE_MAX - DISTANCE_MIN) / DISTANCE_STEP
