@@ -43,7 +43,7 @@ class ExamActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    text.text=it.items[0].full_name
+                    //text.text=it.items[0].full_name
                 },{
                     Log.d("MainActivity","ERROR message : ${it.message}")
                 }))
