@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -14,4 +14,10 @@
         android:background="@drawable/textview_background"
         android:text="1500m"
         />
-</LinearLayout>
+
+    <kotlins.module.labyrintos.Seekbar.VerticalSeekBar
+        android:layout_width="56dp"
+        android:layout_height="200dp"
+        android:progressDrawable="@drawable/seekbar_progressdrawable"
+        android:thumb="@drawable/seekbar_thumb" />
+</RelativeLayout>
