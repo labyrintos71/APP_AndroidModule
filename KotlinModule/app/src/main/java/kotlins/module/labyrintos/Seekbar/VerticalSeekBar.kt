@@ -20,6 +20,8 @@ class VerticalSeekBar : AppCompatSeekBar {
     //TODO onDraw에서 if 체크는 바람직하지 않아보인다.
     // onAttachwindow에서 초기화는 가능하지만 onmeasure 거치기 전이기 때문에 크기가 없어 계산이 안된다.
     // 좀더 좋은 위치는 없는걸까?
+
+    //설정 가능한 attrs 값
     private var MIN = 0
     private var MAX = 100
     private var STEP = 1
@@ -32,7 +34,14 @@ class VerticalSeekBar : AppCompatSeekBar {
 
     private var dockerID: Int = 0
     private lateinit var hintText: SeekBarHintView
-    private var doLambda: (progress: Int) -> String = { "$progress" }
+
+    //thumb에 표현할 String 형식
+    private var doLambda: (progress: Int) -> String = { progress ->  "$progress" }
+
+    //이벤트 리스너 대체 람다식
+    private var progressChanged: (progress: Int) -> Unit = { }
+    private var startChanged: (progress: Int) -> Unit = { }
+    private var endChanged: (progress: Int) -> Unit = { }
 
     fun Int.dpToPx(): Int = (this * context.resources.displayMetrics.density).toInt()
     fun Int.pxToDp(): Int = (this / context.resources.displayMetrics.density).toInt()
@@ -82,14 +91,16 @@ class VerticalSeekBar : AppCompatSeekBar {
 
         setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (USE_HINT)
-                    updateThumb(progress * STEP)
+                if (USE_HINT) updateThumb(progress * STEP)
+                progressChanged(progress * STEP)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
+                startChanged(progress * STEP)
             }
 
             override fun onStopTrackingTouch(p0: SeekBar?) {
+                endChanged(progress * STEP)
             }
         })
 
@@ -121,15 +132,29 @@ class VerticalSeekBar : AppCompatSeekBar {
         doLambda = lambda
     }
 
+    fun setOnProgressChanged(lambda: (progress: Int) -> Unit) {
+        progressChanged = lambda
+    }
+
+    fun setOnStartChanged(lambda: (progress: Int) -> Unit) {
+        startChanged = lambda
+    }
+
+    fun setOnEndChanged(lambda: (progress: Int) -> Unit) {
+        endChanged = lambda
+    }
+
+    fun getProgressValue(): Int {
+        return progress * STEP
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(h, w, oldh, oldw)
-        Log.e("onSizeChanged", "onRelease onSizeChanged")
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(heightMeasureSpec, widthMeasureSpec)
         setMeasuredDimension(measuredHeight, measuredWidth)
-        Log.e("onMeasure", "onRelease onMeasure")
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -141,10 +166,11 @@ class VerticalSeekBar : AppCompatSeekBar {
             needInit = false
             max = (MAX - MIN) / STEP
             progress = INITVAL / STEP
+            Log.e("setTypeArray:", "$MIN, $MAX, $STEP, $INITVAL")
+            Log.e("setTypeArray:", "$max, $progress")
             onSizeChanged(width, height, 0, 0)
             if (USE_HINT) setHintView(dockerID)
         }
-        Log.e("onDraw", "onRelease onDraw")
         super.onDraw(canvas)
     }
 
@@ -166,4 +192,5 @@ class VerticalSeekBar : AppCompatSeekBar {
     override fun performClick(): Boolean {
         return super.performClick()
     }
+
 }

@@ -45,6 +45,10 @@
     <kotlins.module.labyrintos.Seekbar.VerticalSeekBar
         app:dockerID="@id/hint_textview"
         app:dockerUSE="true"
+        app:init="1500"
+        app:min="0"
+        app:max="2000"
+        app:step="50"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
         android:id="@+id/vertical_seekbar"
