@@ -6,10 +6,10 @@
         <attr name="dockerMargin" format="reference|integer" />
         <attr name="dockerDirection" format="reference|integer" />
         <attr name="dockerSTEP" format="reference|integer" />
-        <attr name="MIN" format="reference|integer" />
-        <attr name="MAX" format="reference|integer" />
-        <attr name="STEP" format="reference|integer" />
-        <attr name="INITVAL" format="reference|integer" />
+        <attr name="min" format="reference|integer" />
+        <attr name="max" format="reference|integer" />
+        <attr name="step" format="reference|integer" />
+        <attr name="init" format="reference|integer" />
     </declare-styleable>
 
 </resources>

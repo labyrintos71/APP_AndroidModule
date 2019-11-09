@@ -1,32 +1,25 @@
 package kotlins.module.labyrintos.Seekbar
 
-import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.os.Handler
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSeekBar
 import kotlins.module.labyrintos.R
-import org.jetbrains.anko.layoutInflater
-import org.jetbrains.anko.sdk27.coroutines.onSeekBarChangeListener
 
 /**
  * Created by Labyrintos on 2019-11-08
  */
 class VerticalSeekBar : AppCompatSeekBar {
-
+    //TODO onDraw에서 if 체크는 바람직하지 않아보인다.
+    // onAttachwindow에서 초기화는 가능하지만 onmeasure 거치기 전이기 때문에 크기가 없어 계산이 안된다.
+    // 좀더 좋은 위치는 없는걸까?
     private var MIN = 0
     private var MAX = 100
     private var STEP = 1
@@ -35,9 +28,11 @@ class VerticalSeekBar : AppCompatSeekBar {
     private var DIRECTION = RelativeLayout.LEFT_OF
     private var USE_HINT = false
 
-    private var dockerID : Int =0
+    private var needInit = true
+
+    private var dockerID: Int = 0
     private lateinit var hintText: SeekBarHintView
-    private var doLambda: (progress:Int) -> String = { "$progress" }
+    private var doLambda: (progress: Int) -> String = { "$progress" }
 
     fun Int.dpToPx(): Int = (this * context.resources.displayMetrics.density).toInt()
     fun Int.pxToDp(): Int = (this / context.resources.displayMetrics.density).toInt()
@@ -48,52 +43,47 @@ class VerticalSeekBar : AppCompatSeekBar {
         getAttrs(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         getAttrs(attrs, defStyleAttr)
     }
 
-    // 만들어 놓은 attrs을 참조합니다.
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.VerticalSeekBar)
         setTypeArray(typedArray)
     }
 
-    // 만들어 놓은 attrs을 참조합니다.
     private fun getAttrs(attrs: AttributeSet?, defStyleAttr: Int) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.VerticalSeekBar, defStyleAttr, 0)
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.VerticalSeekBar, defStyleAttr, 0)
         setTypeArray(typedArray)
     }
 
-    // 여기서 값을 세팅해줍니다.
+    // 받아온 attrs 값 세팅
     private fun setTypeArray(typedArray: TypedArray) {
         USE_HINT = typedArray.getBoolean(R.styleable.VerticalSeekBar_dockerUSE, false)
         dockerID = typedArray.getResourceId(R.styleable.VerticalSeekBar_dockerID, 0)
-        MIN = typedArray.getInt(R.styleable.VerticalSeekBar_MIN, 0)
-        MAX = typedArray.getInt(R.styleable.VerticalSeekBar_MAX, 100)
-        STEP = typedArray.getInt(R.styleable.VerticalSeekBar_STEP, 1)
-        INITVAL = typedArray.getInt(R.styleable.VerticalSeekBar_INITVAL, 75)
+        MIN = typedArray.getInt(R.styleable.VerticalSeekBar_min, 0)
+        MAX = typedArray.getInt(R.styleable.VerticalSeekBar_max, 100)
+        STEP = typedArray.getInt(R.styleable.VerticalSeekBar_step, 1)
+        INITVAL = typedArray.getInt(R.styleable.VerticalSeekBar_init, 75)
         MARGIN = typedArray.getInt(R.styleable.VerticalSeekBar_dockerMargin, 20)
         DIRECTION = typedArray.getInt(R.styleable.VerticalSeekBar_dockerDirection, 0)
 
-        Handler().postDelayed({
-            if(USE_HINT) setHintView(dockerID)
-        }, 500)
         typedArray.recycle()
     }
 
     private fun setHintView(resID: Int) {
         hintText = (parent as? ViewGroup)?.findViewById(resID)!!
-
-        Handler().postDelayed({
-            max = (MAX - MIN) / STEP
-            progress = INITVAL / STEP
-            updateThumb(progress * STEP)
-        }, 500)
+        updateThumb(progress * STEP)
 
         setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(USE_HINT)
-                updateThumb(progress * STEP)
+                if (USE_HINT)
+                    updateThumb(progress * STEP)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -127,17 +117,19 @@ class VerticalSeekBar : AppCompatSeekBar {
         hintText.text = doLambda(progress)
     }
 
-    fun setHintLambda(lambda: (progress:Int) -> String){
+    fun setHintLambda(lambda: (progress: Int) -> String) {
         doLambda = lambda
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(h, w, oldh, oldw)
+        Log.e("onSizeChanged", "onRelease onSizeChanged")
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(heightMeasureSpec, widthMeasureSpec)
         setMeasuredDimension(measuredHeight, measuredWidth)
+        Log.e("onMeasure", "onRelease onMeasure")
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -145,6 +137,14 @@ class VerticalSeekBar : AppCompatSeekBar {
             rotate(-90f)
             translate(-height.toFloat(), 0f)
         }
+        if (needInit) {
+            needInit = false
+            max = (MAX - MIN) / STEP
+            progress = INITVAL / STEP
+            onSizeChanged(width, height, 0, 0)
+            if (USE_HINT) setHintView(dockerID)
+        }
+        Log.e("onDraw", "onRelease onDraw")
         super.onDraw(canvas)
     }
 
