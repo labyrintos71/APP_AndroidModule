@@ -5,14 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import io.reactivex.disposables.CompositeDisposable
+import kotlins.module.labyrintos.Seekbar.SeekBarHintView
+import kotlins.module.labyrintos.Seekbar.VerticalSeekBar
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
+    private val seekbar by lazy { findViewById<VerticalSeekBar>(R.id.vertical_seekbar) }
+    private val text by lazy { findViewById<SeekBarHintView>(R.id.hint_textview) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        seekbar.setHintView(text)
    /*     verticalLayout{
             padding = dip(20)
 
