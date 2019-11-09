@@ -10,14 +10,10 @@ import kotlins.module.labyrintos.Seekbar.VerticalSeekBar
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
-    private val seekbar by lazy { findViewById<VerticalSeekBar>(R.id.vertical_seekbar) }
-    private val text by lazy { findViewById<SeekBarHintView>(R.id.hint_textview) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        seekbar.setHintView(text)
+       // seekbar.setHintView(text)
    /*     verticalLayout{
             padding = dip(20)
 

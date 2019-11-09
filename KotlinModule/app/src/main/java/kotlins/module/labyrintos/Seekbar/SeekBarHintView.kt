@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView
  * Created by Labyrintos on 2019-11-09
  */
 class SeekBarHintView : AppCompatTextView {
-    lateinit var doLambda: (y: Float) -> Unit
+    private lateinit var doLambda: (y: Float) -> Unit
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(

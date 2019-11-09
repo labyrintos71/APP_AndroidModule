@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalSeekBar">
+        <attr name="dockerUSE" format="reference|boolean" />
+        <attr name="dockerID" format="reference" />
+        <attr name="dockerMargin" format="reference|integer" />
+        <attr name="dockerDirection" format="reference|integer" />
+        <attr name="dockerSTEP" format="reference|integer" />
+        <attr name="MIN" format="reference|integer" />
+        <attr name="MAX" format="reference|integer" />
+        <attr name="STEP" format="reference|integer" />
+        <attr name="INITVAL" format="reference|integer" />
+    </declare-styleable>
+
+</resources>
