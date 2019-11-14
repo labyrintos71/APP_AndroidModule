@@ -77,18 +77,20 @@ public class SmoothCheckBox extends View implements Checkable {
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
-        mTickPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTickPaint.setStyle(Paint.Style.STROKE);
-        mTickPaint.setStrokeCap(Paint.Cap.ROUND);
-        mTickPaint.setColor(tickColor);
+
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(mCheckedColor);
 
         mFloorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mFloorPaint.setStyle(Paint.Style.FILL);
         mFloorPaint.setColor(mFloorColor);
 
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(mCheckedColor);
+        mTickPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTickPaint.setStyle(Paint.Style.STROKE);
+        mTickPaint.setStrokeCap(Paint.Cap.ROUND);
+        mTickPaint.setColor(tickColor);
+
 
         mTickPath = new Path();
         mCenterPoint = new Point();
@@ -99,7 +101,7 @@ public class SmoothCheckBox extends View implements Checkable {
 
         /*setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {0
                 toggle();
                 mTickDrawing = false;
                 mDrewDistance = 0;
