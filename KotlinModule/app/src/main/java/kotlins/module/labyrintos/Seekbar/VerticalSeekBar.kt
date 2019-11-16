@@ -73,16 +73,17 @@ class VerticalSeekBar : AppCompatSeekBar {
 
     // 받아온 attrs 값 세팅
     private fun setTypeArray(typedArray: TypedArray) {
-        USE_HINT = typedArray.getBoolean(R.styleable.VerticalSeekBar_dockerUSE, false)
-        dockerID = typedArray.getResourceId(R.styleable.VerticalSeekBar_dockerID, 0)
-        MIN = typedArray.getInt(R.styleable.VerticalSeekBar_min, 0)
-        MAX = typedArray.getInt(R.styleable.VerticalSeekBar_max, 100)
-        STEP = typedArray.getInt(R.styleable.VerticalSeekBar_step, 1)
-        INITVAL = typedArray.getInt(R.styleable.VerticalSeekBar_init, 75)
-        MARGIN = typedArray.getInt(R.styleable.VerticalSeekBar_dockerMargin, 20)
-        DIRECTION = typedArray.getInt(R.styleable.VerticalSeekBar_dockerDirection, 0)
-
-        typedArray.recycle()
+        typedArray.apply {
+            USE_HINT = getBoolean(R.styleable.VerticalSeekBar_dockerUSE, false)
+            dockerID = getResourceId(R.styleable.VerticalSeekBar_dockerID, 0)
+            MIN = getInt(R.styleable.VerticalSeekBar_min, 0)
+            MAX = getInt(R.styleable.VerticalSeekBar_max, 100)
+            STEP = getInt(R.styleable.VerticalSeekBar_step, 1)
+            INITVAL = getInt(R.styleable.VerticalSeekBar_init, 75)
+            MARGIN = getInt(R.styleable.VerticalSeekBar_dockerMargin, 20)
+            DIRECTION = getInt(R.styleable.VerticalSeekBar_dockerDirection, 0)
+            recycle()
+        }
     }
 
     private fun setHintView(resID: Int) {

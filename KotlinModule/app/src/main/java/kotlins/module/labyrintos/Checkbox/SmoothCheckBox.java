@@ -73,24 +73,22 @@ public class SmoothCheckBox extends View implements Checkable {
         mFloorColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
         mCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_checked, COLOR_CHECKED);
         mUnCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked, COLOR_UNCHECKED);
-        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, 0);
+        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, CompatUtils.dp2px(getContext(), 0));
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
-
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(mCheckedColor);
-
-        mFloorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mFloorPaint.setStyle(Paint.Style.FILL);
-        mFloorPaint.setColor(mFloorColor);
-
         mTickPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTickPaint.setStyle(Paint.Style.STROKE);
         mTickPaint.setStrokeCap(Paint.Cap.ROUND);
         mTickPaint.setColor(tickColor);
 
+        mFloorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mFloorPaint.setStyle(Paint.Style.FILL);
+        mFloorPaint.setColor(mFloorColor);
+
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(mCheckedColor);
 
         mTickPath = new Path();
         mCenterPoint = new Point();
@@ -101,7 +99,7 @@ public class SmoothCheckBox extends View implements Checkable {
 
         /*setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {0
+            public void onClick(View v) {
                 toggle();
                 mTickDrawing = false;
                 mDrewDistance = 0;
@@ -156,6 +154,7 @@ public class SmoothCheckBox extends View implements Checkable {
 
     /**
      * checked with animation
+     *
      * @param checked checked
      * @param animate change with animation
      */
@@ -226,8 +225,7 @@ public class SmoothCheckBox extends View implements Checkable {
         mTickPoints[2].x = Math.round((float) getMeasuredWidth() / 30 * 22);
         mTickPoints[2].y = Math.round((float) getMeasuredHeight() / 30 * 10);
 
-        mLeftLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[1].x - mTickPoints[0].x, 2) +
-                Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
+        mLeftLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[1].x - mTickPoints[0].x, 2) + Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
         mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
                 Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
         mTickPaint.setStrokeWidth(mStrokeWidth);
