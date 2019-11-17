@@ -226,11 +226,39 @@ class SmoothCheckBox : View, Checkable {
             canvas?.drawPath(tickPath, tickPaint)
             drewDistance = min(drewDistance, leftLineDistance)
         } else {
+            tickPath.moveTo(tickPoint[0].x.toFloat(), tickPoint[0].y.toFloat())
+            tickPath.lineTo(tickPoint[1].x.toFloat(), tickPoint[1].y.toFloat())
+            canvas?.drawPath(tickPath, tickPaint)
+
+            if (drewDistance < leftLineDistance + rightLineDistance) {
+                tickPath.reset()
+                tickPath.moveTo(tickPoint[1].x.toFloat(), tickPoint[1].y.toFloat())
+                tickPath.lineTo(
+                    tickPoint[1].x + (tickPoint[2].x - tickPoint[1].x) * (drewDistance - leftLineDistance) / rightLineDistance,
+                    tickPoint[1].y + (tickPoint[1].y - tickPoint[2].y) * (drewDistance - leftLineDistance) / rightLineDistance
+                )
+                canvas?.drawPath(tickPath,tickPaint)
+                //  float step = (mWidth / 20) < 3 ? 3 : (mWidth / 20);
+                //                mDrewDistance += step;
+                drewDistance += max(measuredWidth / 20f, 3f)
+            }else{
+                tickPath.reset()
+                tickPath.moveTo(tickPoint[1].x.toFloat(), tickPoint[1].y.toFloat())
+                tickPath.lineTo(tickPoint[2].x.toFloat(), tickPoint[2].y.toFloat())
+                canvas?.drawPath(tickPath, tickPaint)
+            }
 
         }
         if (drewDistance < leftLineDistance + rightLineDistance) {
             postDelayed({ postInvalidate() }, 10)
         }
+    }
+
+    private fun startCheckedAnimation(){
+
+    }
+    private fun startUnCheckedAnimation(){
+
     }
 
     interface OnCheckedChangeListener {
