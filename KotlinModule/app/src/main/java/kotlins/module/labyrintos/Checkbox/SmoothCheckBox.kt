@@ -1,10 +1,12 @@
 package kotlins.module.labyrintos.Checkbox
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.Checkable
 import kotlins.module.labyrintos.Extension.dpToPx
 import kotlins.module.labyrintos.R
@@ -18,7 +20,7 @@ class SmoothCheckBox : View, Checkable {
     private val COLOR_TICK = Color.WHITE
     private val COLOR_UNCHECKED = Color.WHITE
     private val COLOR_CHECKED = Color.parseColor("#FB4846")
-    private val COLOR_FLOOR_UNCHECKED = Color.parseColor("DFDFDF")
+    private val COLOR_FLOOR_UNCHECKED = Color.parseColor("#DFDFDF")
 
     private val DRAW_SIZE = 25.dpToPx(context)
     private val ANIM_DURATION = 300
@@ -93,6 +95,13 @@ class SmoothCheckBox : View, Checkable {
         }
         floorUnCheckColor = floorColor
         //리스트뷰 안에 넣을경우 아래 없고 이벤트 처리해주는게 편함
+        setOnClickListener {
+            toggle()
+            tickDrawing = false
+            drewDistance = 0f
+            if(isChecked) startCheckedAnimation()
+            else startUnCheckedAnimation()
+        }
         /*setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {0
@@ -237,11 +246,11 @@ class SmoothCheckBox : View, Checkable {
                     tickPoint[1].x + (tickPoint[2].x - tickPoint[1].x) * (drewDistance - leftLineDistance) / rightLineDistance,
                     tickPoint[1].y + (tickPoint[1].y - tickPoint[2].y) * (drewDistance - leftLineDistance) / rightLineDistance
                 )
-                canvas?.drawPath(tickPath,tickPaint)
+                canvas?.drawPath(tickPath, tickPaint)
                 //  float step = (mWidth / 20) < 3 ? 3 : (mWidth / 20);
                 //                mDrewDistance += step;
                 drewDistance += max(measuredWidth / 20f, 3f)
-            }else{
+            } else {
                 tickPath.reset()
                 tickPath.moveTo(tickPoint[1].x.toFloat(), tickPoint[1].y.toFloat())
                 tickPath.lineTo(tickPoint[2].x.toFloat(), tickPoint[2].y.toFloat())
@@ -254,11 +263,71 @@ class SmoothCheckBox : View, Checkable {
         }
     }
 
-    private fun startCheckedAnimation(){
-
+    private fun startCheckedAnimation() {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = animDuration.toLong() / 3L * 2L
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                scaleVal = it.animatedValue as Float
+                floorColor = getGradientColor(checkedColor, floorUnCheckColor, 1 - scaleVal)
+                postInvalidate()
+            }
+            start()
+        }
+        ValueAnimator.ofFloat(1f, 0.8f, 1f).apply {
+            duration = animDuration.toLong()
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                floorScale = it.animatedValue as Float
+                postInvalidate()
+            }
+            start()
+        }
+        postDelayed({
+            tickDrawing = true
+            postInvalidate()
+        }, animDuration.toLong())
     }
-    private fun startUnCheckedAnimation(){
 
+
+    private fun startUnCheckedAnimation() {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = animDuration.toLong()
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                scaleVal = it.animatedValue as Float
+                floorColor = getGradientColor(checkedColor, floorUnCheckColor, scaleVal)
+                postInvalidate()
+            }
+            start()
+        }
+        ValueAnimator.ofFloat(1f, 0.8f, 1f).apply {
+            duration = animDuration.toLong()
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                floorScale = it.animatedValue as Float
+                postInvalidate()
+            }
+            start()
+        }
+    }
+
+    fun getGradientColor(startColor: Int, endColor: Int, percent: Float): Int {
+        val startA = Color.alpha(startColor)
+        val startR = Color.red(startColor)
+        val startG = Color.green(startColor)
+        val startB = Color.blue(startColor)
+
+        val endA = Color.alpha(endColor)
+        val endR = Color.red(endColor)
+        val endG = Color.green(endColor)
+        val endB = Color.blue(endColor)
+
+        val currentA = (startA * (1 - percent) + endA * percent).toInt()
+        val currentR = (startR * (1 - percent) + endR * percent).toInt()
+        val currentG = (startG * (1 - percent) + endG * percent).toInt()
+        val currentB = (startB * (1 - percent) + endB * percent).toInt()
+        return Color.argb(currentA, currentR, currentG, currentB)
     }
 
     interface OnCheckedChangeListener {

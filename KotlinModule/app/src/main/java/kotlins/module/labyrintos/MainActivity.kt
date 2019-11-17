@@ -1,20 +1,14 @@
 package kotlins.module.labyrintos
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.TextView
 import io.reactivex.disposables.CompositeDisposable
-import kotlins.module.labyrintos.Seekbar.SeekBarHintView
-import kotlins.module.labyrintos.Seekbar.VerticalSeekBar
-import kotlins.module.labyrintos.TEST.MainActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ui_example)
        // seekbar.setHintView(text)
    /*     verticalLayout{
             padding = dip(20)
@@ -32,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
-        startActivity(Intent(this, MainActivity::class.java))
+      //  startActivity(Intent(this, MainActivity::class.java))
        //val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
 

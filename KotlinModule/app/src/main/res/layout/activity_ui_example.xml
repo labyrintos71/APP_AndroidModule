@@ -18,7 +18,10 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+<kotlins.module.labyrintos.Checkbox.SmoothCheckBox
+    android:layout_centerInParent="true"
+    android:layout_width="24dp"
+    android:layout_height="24dp"/>
 
     <View
         android:layout_width="102dp"
@@ -26,7 +29,7 @@
         android:layout_gravity="center"
         android:background="@drawable/line_dotted_horizontal"
         android:layerType="software" />
-
+<!--
     <kotlins.module.labyrintos.Seekbar.SeekBarHintView
         android:id="@+id/hint_textview"
         android:layout_width="wrap_content"
@@ -57,5 +60,5 @@
         android:progressDrawable="@drawable/seekbar_progressdrawable"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:thumb="@drawable/seekbar_thumb" />
+        android:thumb="@drawable/seekbar_thumb" />-->
 </RelativeLayout>
