@@ -16,7 +16,6 @@ import kotlin.math.*
  * Created by Labyrintos on 2019-11-14
  */
 class SmoothCheckBox : View, Checkable {
-    private val KEY_INSTANCE = "INSTANCESTATE"
     private val COLOR_TICK = Color.WHITE
     private val COLOR_UNCHECKED = Color.WHITE
     private val COLOR_CHECKED = Color.parseColor("#FB4846")
@@ -60,7 +59,6 @@ class SmoothCheckBox : View, Checkable {
     private var rightLineDistance = 0f
     private var drewDistance = 0f
     private var drawDistance = 0f
-    private var customWidth = 0
 
     constructor(context: Context) : super(context)
 
@@ -99,19 +97,6 @@ class SmoothCheckBox : View, Checkable {
             if(isChecked) startCheckedAnimation()
             else startUnCheckedAnimation()
         }
-        /*setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {0
-                toggle();
-                mTickDrawing = false;
-                mDrewDistance = 0;
-                if (isChecked()) {
-                    startCheckedAnimation();
-                } else {
-                    startUnCheckedAnimation();
-                }
-            }
-        });*/
     }
 
 
@@ -167,7 +152,6 @@ class SmoothCheckBox : View, Checkable {
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        customWidth = measuredWidth
         strokeWidth = if (strokeWidth == 0) measuredWidth / 10 else strokeWidth
         strokeWidth = min(strokeWidth, measuredWidth / 5)
         strokeWidth = max(strokeWidth, 3)
@@ -220,7 +204,7 @@ class SmoothCheckBox : View, Checkable {
         tickPath.reset()
 
         if (drewDistance < leftLineDistance) {
-            drewDistance += max(customWidth / 20f, 3f)
+            drewDistance += max(measuredWidth / 20f, 3f)
             tickPath.moveTo(tickPoint[0].x.toFloat(), tickPoint[0].y.toFloat())
             tickPath.lineTo(
                 tickPoint[0].x + (tickPoint[1].x - tickPoint[0].x) * drewDistance / leftLineDistance,
@@ -304,7 +288,7 @@ class SmoothCheckBox : View, Checkable {
         }
     }
 
-    fun getGradientColor(startColor: Int, endColor: Int, percent: Float): Int {
+    private fun getGradientColor(startColor: Int, endColor: Int, percent: Float): Int {
         val startA = Color.alpha(startColor)
         val startR = Color.red(startColor)
         val startG = Color.green(startColor)
