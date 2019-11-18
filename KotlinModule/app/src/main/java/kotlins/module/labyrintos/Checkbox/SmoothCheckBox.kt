@@ -173,12 +173,12 @@ class SmoothCheckBox : View, Checkable {
         strokeWidth = max(strokeWidth, 3)
         centerPoint.x = measuredWidth / 2
         centerPoint.y = measuredHeight / 2
-        tickPoint[0].x = round(measuredWidth.toFloat() / 30f * 7f).toInt()
-        tickPoint[0].y = round(measuredWidth.toFloat() / 30f * 14f).toInt()
-        tickPoint[1].x = round(measuredWidth.toFloat() / 30f * 13f).toInt()
-        tickPoint[1].y = round(measuredWidth.toFloat() / 30f * 20f).toInt()
-        tickPoint[2].x = round(measuredWidth.toFloat() / 30f * 22f).toInt()
-        tickPoint[2].y = round(measuredWidth.toFloat() / 30f * 10f).toInt()
+        tickPoint[0].x = round(measuredWidth.toFloat() / 30 * 7).toInt()
+        tickPoint[0].y = round(measuredWidth.toFloat() / 30 * 14).toInt()
+        tickPoint[1].x = round(measuredWidth.toFloat() / 30 * 13).toInt()
+        tickPoint[1].y = round(measuredWidth.toFloat() / 30 * 20).toInt()
+        tickPoint[2].x = round(measuredWidth.toFloat() / 30 * 22).toInt()
+        tickPoint[2].y = round(measuredWidth.toFloat() / 30 * 10).toInt()
         leftLineDistance = sqrt(
             (tickPoint[1].x - tickPoint[0].x).toFloat().pow(2) +
                     (tickPoint[1].y - tickPoint[0].y).toFloat().pow(2)
@@ -238,11 +238,9 @@ class SmoothCheckBox : View, Checkable {
                 tickPath.moveTo(tickPoint[1].x.toFloat(), tickPoint[1].y.toFloat())
                 tickPath.lineTo(
                     tickPoint[1].x + (tickPoint[2].x - tickPoint[1].x) * (drewDistance - leftLineDistance) / rightLineDistance,
-                    tickPoint[1].y + (tickPoint[1].y - tickPoint[2].y) * (drewDistance - leftLineDistance) / rightLineDistance
+                    tickPoint[1].y - (tickPoint[1].y - tickPoint[2].y) * (drewDistance - leftLineDistance) / rightLineDistance
                 )
                 canvas?.drawPath(tickPath, tickPaint)
-                //  float step = (mWidth / 20) < 3 ? 3 : (mWidth / 20);
-                //                mDrewDistance += step;
                 drewDistance += max(measuredWidth / 20f, 3f)
             } else {
                 tickPath.reset()
