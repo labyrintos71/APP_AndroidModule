@@ -33,13 +33,12 @@ class SmoothCheckBox : View, Checkable {
     private val tickPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
-            color = floorColor
+            strokeCap = Paint.Cap.ROUND
         }
     }
     private val floorPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
-            strokeCap = Paint.Cap.ROUND
         }
     }
 
@@ -60,11 +59,8 @@ class SmoothCheckBox : View, Checkable {
     private var leftLineDistance = 0f
     private var rightLineDistance = 0f
     private var drewDistance = 0f
-    //    private Point[] mTickPoints;
-    //    private Point mCenterPoint;
-    //    private Path mTickPath;
-
     private var drawDistance = 0f
+    private var customWidth = 0
 
     constructor(context: Context) : super(context)
 
@@ -94,6 +90,7 @@ class SmoothCheckBox : View, Checkable {
             recycle()
         }
         floorUnCheckColor = floorColor
+        floorPaint.color = floorColor
         //리스트뷰 안에 넣을경우 아래 없고 이벤트 처리해주는게 편함
         setOnClickListener {
             toggle()
@@ -158,12 +155,8 @@ class SmoothCheckBox : View, Checkable {
         val specSize = MeasureSpec.getSize(spec)
 
         return when (MeasureSpec.getMode(spec)) {
-            MeasureSpec.UNSPECIFIED, MeasureSpec.AT_MOST -> {
-                min(DRAW_SIZE, specSize)
-            }
-            MeasureSpec.EXACTLY -> {
-                specSize
-            }
+            MeasureSpec.UNSPECIFIED, MeasureSpec.AT_MOST -> min(DRAW_SIZE, specSize)
+            MeasureSpec.EXACTLY -> specSize
             else -> 0
         }
     }
@@ -174,17 +167,18 @@ class SmoothCheckBox : View, Checkable {
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        customWidth = measuredWidth
         strokeWidth = if (strokeWidth == 0) measuredWidth / 10 else strokeWidth
-        strokeWidth = max(strokeWidth, measuredWidth / 5)
+        strokeWidth = min(strokeWidth, measuredWidth / 5)
         strokeWidth = max(strokeWidth, 3)
         centerPoint.x = measuredWidth / 2
         centerPoint.y = measuredHeight / 2
-        tickPoint[0].x = round(measuredWidth.toFloat() / 30 * 7).toInt()
-        tickPoint[0].y = round(measuredWidth.toFloat() / 30 * 14).toInt()
-        tickPoint[1].x = round(measuredWidth.toFloat() / 30 * 13).toInt()
-        tickPoint[1].y = round(measuredWidth.toFloat() / 30 * 20).toInt()
-        tickPoint[2].x = round(measuredWidth.toFloat() / 30 * 22).toInt()
-        tickPoint[2].y = round(measuredWidth.toFloat() / 30 * 10).toInt()
+        tickPoint[0].x = round(measuredWidth.toFloat() / 30f * 7f).toInt()
+        tickPoint[0].y = round(measuredWidth.toFloat() / 30f * 14f).toInt()
+        tickPoint[1].x = round(measuredWidth.toFloat() / 30f * 13f).toInt()
+        tickPoint[1].y = round(measuredWidth.toFloat() / 30f * 20f).toInt()
+        tickPoint[2].x = round(measuredWidth.toFloat() / 30f * 22f).toInt()
+        tickPoint[2].y = round(measuredWidth.toFloat() / 30f * 10f).toInt()
         leftLineDistance = sqrt(
             (tickPoint[1].x - tickPoint[0].x).toFloat().pow(2) +
                     (tickPoint[1].y - tickPoint[0].y).toFloat().pow(2)
@@ -226,7 +220,7 @@ class SmoothCheckBox : View, Checkable {
         tickPath.reset()
 
         if (drewDistance < leftLineDistance) {
-            drewDistance += max(measuredWidth / 20f, 3f)
+            drewDistance += max(customWidth / 20f, 3f)
             tickPath.moveTo(tickPoint[0].x.toFloat(), tickPoint[0].y.toFloat())
             tickPath.lineTo(
                 tickPoint[0].x + (tickPoint[1].x - tickPoint[0].x) * drewDistance / leftLineDistance,
@@ -264,12 +258,12 @@ class SmoothCheckBox : View, Checkable {
     }
 
     private fun startCheckedAnimation() {
-        ValueAnimator.ofFloat(0f, 1f).apply {
+        ValueAnimator.ofFloat(1f, 0f).apply {
             duration = animDuration.toLong() / 3L * 2L
             interpolator = LinearInterpolator()
             addUpdateListener {
                 scaleVal = it.animatedValue as Float
-                floorColor = getGradientColor(checkedColor, floorUnCheckColor, 1 - scaleVal)
+                floorColor = getGradientColor(unCheckedColor, checkedColor, 1 - scaleVal)
                 postInvalidate()
             }
             start()
