@@ -21,6 +21,10 @@
         </activity>
         <activity android:name="kotlins.module.labyrintos.Network.RetrofitForCouroutine.ExamActivity"/>
         <activity android:name=".Contacts.ContactsSampleActivity"/>
+        <activity android:name=".StatusBar.StatusBarSampleColorActivity"
+            android:theme="@style/AppTheme.Color"/>
+        <activity android:name=".StatusBar.StatusBarSampleTranslucentActivity"
+            android:theme="@style/AppTheme.Translucent"/>
     </application>
 
 </manifest>

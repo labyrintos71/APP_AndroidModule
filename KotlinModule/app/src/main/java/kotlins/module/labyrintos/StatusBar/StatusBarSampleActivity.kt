@@ -8,7 +8,6 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlins.module.labyrintos.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.statusbar_activity.*
 
 class StatusBarSampleActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class StatusBarSampleActivity : AppCompatActivity() {
         }
 
         color_theme.setOnClickListener {
-            startActivity(Intent(this, ColorActivity::class.java))
+            startActivity(Intent(this, StatusBarSampleColorActivity::class.java))
         }
         //특징: 상태바 영역을 뷰가 사용한다. 배경색은 변경할 수 없다
         translucent_code.setOnClickListener {
@@ -39,7 +38,7 @@ class StatusBarSampleActivity : AppCompatActivity() {
         }
 
         translucent_theme.setOnClickListener {
-            startActivity(Intent(this, TranslucentActivity::class.java))
+            startActivity(Intent(this, StatusBarSampleTranslucentActivity::class.java))
         }
         //특징: 상태바 영역을 뷰가 사용한다. 상태바가 투명해 진다. 네비게이션바도 투명해지면서 뷰가 해당 영역을 사용한다
         transparent1_code.setOnClickListener {
