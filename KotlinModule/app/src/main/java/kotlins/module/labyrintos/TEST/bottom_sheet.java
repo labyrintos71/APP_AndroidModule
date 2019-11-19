@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import kotlins.module.labyrintos.R;
 
-public class MainActivity_Backup extends AppCompatActivity {
+public class bottom_sheet extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private Button mButton1, mButton2, mButton3;
@@ -20,7 +20,7 @@ public class MainActivity_Backup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_test_backup);
+        setContentView(R.layout.activity_bottomsheet_test_backup);
 
         View bottomSheet = findViewById(R.id.bottom_sheet1);
         mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
