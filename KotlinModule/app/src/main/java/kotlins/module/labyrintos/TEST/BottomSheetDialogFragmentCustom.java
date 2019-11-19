@@ -13,7 +13,7 @@ import kotlins.module.labyrintos.R;
 /**
  * Created by Obaro on 01/08/2016.
  */
-public class BottomSheetDialogFragment extends com.google.android.material.bottomsheet.BottomSheetDialogFragment {
+public class BottomSheetDialogFragmentCustom extends com.google.android.material.bottomsheet.BottomSheetDialogFragment {
 
     private BottomSheetBehavior.BottomSheetCallback
             mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {

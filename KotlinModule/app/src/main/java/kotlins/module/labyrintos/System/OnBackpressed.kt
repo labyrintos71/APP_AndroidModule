@@ -13,7 +13,7 @@ class OnBackpressed : AppCompatActivity(){
     private var backpressedTime = -1000L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_picture_sample)
     }
 
     override fun onBackPressed() {

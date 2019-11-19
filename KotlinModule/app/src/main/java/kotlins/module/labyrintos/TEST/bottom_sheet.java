@@ -87,7 +87,7 @@ public class bottom_sheet extends AppCompatActivity {
         mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                com.google.android.material.bottomsheet.BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetDialogFragment();
+                com.google.android.material.bottomsheet.BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetDialogFragmentCustom();
                 bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
             }
         });
