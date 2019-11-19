@@ -191,6 +191,8 @@ class SmoothCheckBox : View, Checkable {
     }
 
     private fun drawCenter(canvas: Canvas?) {
+        //투명 배경 가능하게 설정
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC)
         paint.color = unCheckedColor
         val radius = (centerPoint.x - strokeWidth) * scaleVal
         canvas?.drawCircle(centerPoint.x.toFloat(), centerPoint.y.toFloat(), radius, paint)

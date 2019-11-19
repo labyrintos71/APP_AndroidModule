@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="kotlins.module.labyrintos.Network.RetrofitForCouroutine.ExamActivity"/>
-        <activity android:name=".Contacts.ExamActivity"/>
+        <activity android:name=".Contacts.ContactsSampleActivity"/>
     </application>
 
 </manifest>
