@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import kotlins.module.labyrintos.Permission.ExamActivity
 import java.security.MessageDigest
 
 /**

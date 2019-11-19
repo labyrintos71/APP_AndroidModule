@@ -7,7 +7,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import kotlins.module.labyrintos.R;
 
@@ -20,7 +19,7 @@ public class bottom_sheet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottomsheet_test_backup);
+        setContentView(R.layout.bottomsheet_activity);
 
         View bottomSheet = findViewById(R.id.bottom_sheet1);
         mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
@@ -88,7 +87,7 @@ public class bottom_sheet extends AppCompatActivity {
         mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheet3DialogFragment();
+                com.google.android.material.bottomsheet.BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetDialogFragment();
                 bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
             }
         });

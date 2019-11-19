@@ -11,7 +11,7 @@ import kotlins.module.labyrintos.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.statusbar_activity.*
 
-class SampleActivity : AppCompatActivity() {
+class StatusBarSampleActivity : AppCompatActivity() {
     private var defaultFlag: Int = 0
     private var defaultSystemUiVisibility: Int = 0
 
