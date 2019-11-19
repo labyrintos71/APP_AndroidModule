@@ -1,8 +1,10 @@
 package kotlins.module.labyrintos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.reactivex.disposables.CompositeDisposable
+import kotlins.module.labyrintos.BottomSheet.BottomSheetSampleActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             yesButton { toast("OK 누름") }
             noButton { toast("cancel을 클릭") }
         }*/
-      //  startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, BottomSheetSampleActivity::class.java))
        //val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
 
