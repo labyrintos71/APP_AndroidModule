@@ -3,8 +3,10 @@ package kotlins.module.labyrintos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import io.reactivex.disposables.CompositeDisposable
 import kotlins.module.labyrintos.BottomSheet.BottomSheetSampleActivity
+import kotlins.module.labyrintos.StatusBar.BlockStatusBar
 
 class MainActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
@@ -31,5 +33,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, BottomSheetSampleActivity::class.java))
        //val returnval =  RetrofitCreator.create(ReqResService::class.java).getUser(123)
     }
-
 }

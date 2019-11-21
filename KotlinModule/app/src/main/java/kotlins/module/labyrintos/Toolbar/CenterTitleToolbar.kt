@@ -19,9 +19,9 @@ class CenterTitleToolbar @JvmOverloads constructor(context: Context, attrs: Attr
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
         //id 인자로 받게 해줘야됨
-        rootView.title_text?.apply{
+        /*rootView.title_text?.apply{
             getLocationInWindow(location)
             translationX += (-location[0] + this@CenterTitleToolbar.width / 2 - width / 2);
-        }
+        }*/
     }
 }
