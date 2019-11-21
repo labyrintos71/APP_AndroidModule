@@ -14,6 +14,7 @@ class OnBackpressed : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_sample)
+        //xml layout에 android:keepScreenOn="true" 입력
     }
 
     override fun onBackPressed() {
@@ -26,4 +27,5 @@ class OnBackpressed : AppCompatActivity(){
         Toast.makeText(this, "이전 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
         //super.onBackPressed()
     }
+
 }
