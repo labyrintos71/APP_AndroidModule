@@ -1,6 +1,7 @@
 package kotlins.module.labyrintos.Extension
 
 import android.content.Context
+import java.text.NumberFormat
 
 /**
  * Created by Labyrintos on 2019-11-11
@@ -14,3 +15,4 @@ fun <T> multipleWith(vararg receivers: T, block: T.() -> Unit) {
         it.block()
     }
 }
+fun Double.toMoneyComma(): String = NumberFormat.getInstance().format(this)
