@@ -1,4 +1,4 @@
-package kotlins.module.labyrintos.System
+package kotlins.module.labyrintos.Activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -9,16 +9,16 @@ import kotlin.system.exitProcess
 /**
  * Created by Labyrintos on 2019-11-19
  */
-class OnBackpressed : AppCompatActivity(){
+class SampleActivity : AppCompatActivity(){
     private var backpressedTime = -1000L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_sample)
-        //xml layout에 android:keepScreenOn="true" 입력
     }
 
     override fun onBackPressed() {
         if (System.currentTimeMillis() - backpressedTime <= 1000){
+            //앱 완전 종료
             finishAffinity()
             exitProcess(0)
         }
@@ -27,5 +27,4 @@ class OnBackpressed : AppCompatActivity(){
         Toast.makeText(this, "이전 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
         //super.onBackPressed()
     }
-
 }

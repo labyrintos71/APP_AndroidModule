@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:layout_margin="8dp"
-                android:text="@string/button2"/>
+                android:text="STATUS"/>
 
             <Button
                 android:id="@+id/button_2"
@@ -36,7 +36,14 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:layout_margin="8dp"
-                android:text="@string/button3"/>
+                android:text="BottomSheetDialog"/>
+            <Button
+                android:id="@+id/button_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_margin="8dp"
+                android:text="BottomSheetDialogFragment"/>
 
         </LinearLayout>
 
@@ -59,7 +66,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/sheet_p2"
+                android:text="Name"
                 android:textSize="16sp"
                 android:textAllCaps="true"
                 android:padding="16dp"/>

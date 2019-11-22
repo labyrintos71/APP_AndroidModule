@@ -8,7 +8,7 @@ import kotlins.module.labyrintos.R
 /**
  * Created by Labyrintos on 2019-11-19
  */
-class BottomSheetSampleDialog :BottomSheetDialogFragment(){
+class BottomSheetSampleDialogFragment :BottomSheetDialogFragment(){
     //   private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
     //        @Override
     //        public void onStateChanged(@NonNull View bottomSheet, int newState) {

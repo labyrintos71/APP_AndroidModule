@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/sheet_m1"
+        android:text="Sample Text"
         android:textSize="16sp"
         android:textAllCaps="true"
         android:padding="16dp"/>
@@ -22,7 +22,7 @@
         android:src="@drawable/_android_authority"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/bottomsheet_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
